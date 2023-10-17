@@ -4,26 +4,6 @@ pragma solidity ^0.8.6;
 
 
 interface ILicenseRegistry {
-
-    /**
-    * @dev enum for actions on modifiying, pausing or deleting the offer
-    */
-    enum Actions{
-        UpdateItem,
-        CancelItem,
-        PauseItem,
-        ResumeItem,
-        CancelOffer,
-        BuyLicense,
-        AcceptOffer,
-        ChangeLicense,
-        AcceptChange,
-        UpgradeLicense,
-        CancelLicense,
-        Checklicense
-    }
-    
-
     /**
     * @dev emitted when new content type added
     * @param contentType contract type

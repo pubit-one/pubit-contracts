@@ -2,38 +2,56 @@
 pragma solidity ^0.8.6;
 
 library LicenseLib {
-    // enum ContentType {
+    // ContentType {
     //     Text,Audio,Video, Program, Standard, Product, Procedure
     // }
-    // enum TextLicenseType {
+    // TextLicenseType {
     //     Other,Writer,Publisher,OnlinePublisher,Translator,AudioBookProvider,Auditor,Desinger,Adaptor,Libarary,OnlineLiberary,Institute,Refrencer,PartialUser,BriefPublisher,EndUser,
     // }
-    // enum AudioLicenseType {
+    // AudioLicenseType {
     //     Other,PoemWriter, Composer, Musician, Singer, Narator, Producer, Publisher, OnlinePublisher, OnlineStreamer, Remixer, Club, OnlineContent, ProfessionalVideo, SocialMedia, PersonalPublish, EndUser,
     // }
-    // enum VideoLicenseType{
+    // VideoLicenseType{
     //     Other,Artist, Producer, Publisher, OnlinePublisher, AudioStreamer, PartialUse, PlayChannel, SubTitleProvider, DubPublisher, Dubber, Adaptor, Cinema, Hotels, Transportation, Institutes, EndUser,  
     // }
-    // enum Program{
+    // Program{
     //     Other,
     // }
-
-    /*
-    functions of license
-    updateItem
-    cancelItem
-    pauseItem
-    resumeItem
-    cancelOffer
-    buyLicense
-    acceptOffer
-    changeLicense
-    acceptChange
-    upgradeLicense
-    checkLicense
-    cancel license
-
+    
+    enum LicenseStatus{
+        NotExists, //0
+        Expired,   //1
+        Canceled,  //2
+        Blocked,   //3
+        Invalid,   //4
+        Active,    //5
+    }
+    enum ItemStatus{
+        NotExists, //0
+        Paused,
+        Expired,
+        Deleted,
+        Active,
+    }
+    /**
+    * @dev enum for actions on modifiying, pausing or deleting the offer
     */
+    enum Actions{
+        UpdateItem,
+        CancelItem,
+        PauseItem,
+        ResumeItem,
+        CancelOffer,
+        BuyLicense,
+        AcceptOffer,
+        ChangeLicense,
+        AcceptChange,
+        UpgradeLicense,
+        CancelLicense,
+        BlockLicense,
+        InvalidateLicense,
+        Checklicense
+    }
     error contentTypeExists(bytes32 _contentType);
     error ContentTypeNotSupported(bytes32 _contentType);
     error ContractExistsForLicense(bytes32 _licenseType);
@@ -46,6 +64,12 @@ library LicenseLib {
         bytes32 licenseType;
         address contractAddress;
         uint96 templateId;
+    }
+    struct LicenseIds{
+        address _contractAddress;
+        uint88 id;
+        uint8 status;
+
     }
 
 

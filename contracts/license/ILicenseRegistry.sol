@@ -3,22 +3,24 @@
 pragma solidity ^0.8.6;
 
 
-interface ILicenseDiamond {
+interface ILicenseRegistry {
 
     /**
     * @dev enum for actions on modifiying, pausing or deleting the offer
     */
     enum Actions{
-        UpdateLicenseProposal, //0
-        DeleteLicenseProposal,//1
-        PauseLicenseProposal,//2
-        UpdateLicenseOffer,//3
-        DeleteLicenseOffer,//4
-        PauseLicenseOffer,//5
-        acceptProposal,//6
-        acceptOffer,//7
-        UpdateLicense,//8
-        cancelLicense //9
+        UpdateItem,
+        CancelItem,
+        PauseItem,
+        ResumeItem,
+        CancelOffer,
+        BuyLicense,
+        AcceptOffer,
+        ChangeLicense,
+        AcceptChange,
+        UpgradeLicense,
+        CancelLicense,
+        Checklicense
     }
     
 

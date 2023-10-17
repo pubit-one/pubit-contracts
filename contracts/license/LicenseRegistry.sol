@@ -2,10 +2,10 @@
 
 pragma solidity ^0.8.6;
 
-import "./ILicenseDiamond.sol";
+import "./ILicenseRegistry.sol";
 import "../access/IAccessRestriction.sol";
-
-contract LicenseDiamond is ILicenseDiamond{
+import "./LicenseLib.sol";
+contract LicenseRegistry is ILicenseRegistry{
 
     IAccessRestriction public accessRestriction;
 
@@ -84,5 +84,6 @@ contract LicenseDiamond is ILicenseDiamond{
         contentTypes[bytes32(_contentType)] =true;
         emit contentTypeAdded(bytes32(_contentType));
     }
+    
 
 }

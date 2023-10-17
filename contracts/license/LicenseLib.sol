@@ -17,16 +17,34 @@ library LicenseLib {
     // enum Program{
     //     Other,
     // }
+
+    /*
+    functions of license
+    updateItem
+    cancelItem
+    pauseItem
+    resumeItem
+    cancelOffer
+    buyLicense
+    acceptOffer
+    changeLicense
+    acceptChange
+    upgradeLicense
+    checkLicense
+    cancel license
+
+    */
     error contentTypeExists(bytes32 _contentType);
     error ContentTypeNotSupported(bytes32 _contentType);
     error ContractExistsForLicense(bytes32 _licenseType);
     error LicenseTypeNotSupported(bytes32 _licenseType);
     error InvalidContractAddress(address _contractAddress);
+    error ContractAddressExist(address _contractAddress);
     struct LicenceMetadata{
         bytes32 contentType;
         bytes32 licenseType;
         address contractAddress;
-        uint96 version;
+        uint96 templateId;
     }
 
 

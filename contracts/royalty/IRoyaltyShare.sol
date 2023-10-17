@@ -30,6 +30,7 @@ interface IRoyaltyShare {
         returns (uint256);
 
     function tokenWithdraws(address _recipient) external view returns (uint256);
+    function updateValidTokens(address _tokenAddress,bool _isValid) external;
 
     function holderShares(address _recipient) external view returns (uint256);
 

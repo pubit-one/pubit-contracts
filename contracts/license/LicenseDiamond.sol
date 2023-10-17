@@ -4,15 +4,13 @@ pragma solidity ^0.8.6;
 
 import "./ILicenseDiamond.sol";
 import "../access/IAccessRestriction.sol";
+import "./LicenseLib.sol";
 
 contract LicenseDiamond is ILicenseDiamond{
 
     IAccessRestriction public accessRestriction;
 
-    mapping ( bytes32=>bool ) contentTypes;
-    mapping ( bytes32=>uint96 ) licenseTemplates;
-    mapping ( bytes32=>LicenseLib.LicenceMetadata ) licenses;
-    mapping (address =>bytes32) licenseContracts;
+    address public 
     
     /** NOTE modifier to check msg.sender has admin role */
     modifier onlyAdmin() {
@@ -26,7 +24,9 @@ contract LicenseDiamond is ILicenseDiamond{
         IAccessRestriction candidateContract = IAccessRestriction(
             _accessRestrictionAddress
         );
-        require(candidateContract.isAccessRestriction());
+       if(!candidateContract.isAccessRestriction()){
+        revert LicenseLib.InvalidAccessRestriction(_accessRestrictionAddress);
+       }
         accessRestriction = candidateContract;
     };
 

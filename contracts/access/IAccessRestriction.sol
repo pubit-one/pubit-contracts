@@ -7,6 +7,10 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 /** @title AccessRestriction interface*/
 
 interface IAccessRestriction is IAccessControlUpgradeable {
+    error NotDataManager(address caller);
+    error NotAdmin(address caller);
+    error NotProjectContract(address caller);
+    error NotOwner(address caller);
     function initialize(address _deployer) external;
 
     /** @return true if AccessRestriction contract has been initialized  */

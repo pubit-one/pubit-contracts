@@ -40,6 +40,7 @@ library LicenseLib {
     error LicenseTypeNotSupported(bytes32 _licenseType);
     error InvalidContractAddress(address _contractAddress);
     error ContractAddressExist(address _contractAddress);
+    error InvalidAccessRestriction(address _contractAddress);
     struct LicenceMetadata{
         bytes32 contentType;
         bytes32 licenseType;

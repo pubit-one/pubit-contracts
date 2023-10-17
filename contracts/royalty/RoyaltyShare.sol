@@ -45,7 +45,7 @@ contract RoyaltyShare is IRoyaltyShare {
     }
     function updateValidTokens(address _tokenAddress, bool _isValid) external{
         if( holderShares[msg.sender]==0){
-            revert NotShareHolder(msg.sender);
+            revert RoyaltyLib.NotShareHolder(msg.sender);
         }
         validTokens[_tokenAddress]=_isValid;
     }
@@ -69,25 +69,33 @@ contract RoyaltyShare is IRoyaltyShare {
         uint256 availableBalance = ((token.balanceOf(address(this)) +
             tokenWithdraws[tokenAddress]) * share) / sumShares;
         if(availableBalance < holderWithdraw+_amount){
-            revert InsufficientBalance();
+            revert RoyaltyLib.InsufficientBalance();
         }
         holderTokenWithdraws[msg.sender][tokenAddress] += _amount;
         tokenWithdraws[tokenAddress] += _amount;
         bool success = token.transfer(msg.sender, _amount);
-        require(success, "unsuccessful transfer");
+        if (!success){
+            revert RoyaltyLib.TransferFailed();
+        }
         emit Erc20Withdrawn(tokenAddress, _amount, msg.sender);
     }
 
     function withdrawBase(uint256 _amount) external override {
-        require(_amount > 0, "amount must be gt zero");
+        if(_amount==0){
+            revert RoyaltyLib.InvalidWithdrawAmount(_amount);
+        }
         uint256 share = holderShares[msg.sender];
-        require(share > 0, "not stock holder");
+        if(share==0){
+            revert RoyaltyLib.NotShareHolder(msg.sender);
+        }
         uint256 holderWithdraw = holderBaseWithdraws[msg.sender];
 
         uint256 availableBalance = ((address(this).balance + baseWithdraws) *
             share) / sumShares;
 
-        require(availableBalance >=holderWithdraw+_amount, "no balance to withdraw");
+        if(availableBalance < holderWithdraw+_amount){
+            revert RoyaltyLib.InsufficientBalance();
+        }
 
         holderBaseWithdraws[msg.sender] += _amount;
 

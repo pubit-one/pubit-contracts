@@ -26,7 +26,9 @@ contract LicenseRegistry is ILicenseRegistry{
         IAccessRestriction candidateContract = IAccessRestriction(
             _accessRestrictionAddress
         );
-        require(candidateContract.isAccessRestriction());
+        if(!candidateContract.isAccessRestriction()){
+            revert LicenseLib.InvalidAccessRestriction(_accessRestrictionAddress);
+        }
         accessRestriction = candidateContract;
     };
 

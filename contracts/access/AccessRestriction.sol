@@ -20,7 +20,9 @@ contract AccessRestriction is
 
     /** NOTE modifier to check msg.sender has admin role */
     modifier onlyAdmin() {
-        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender), "caller is not admin");
+        if(!hasRole(DEFAULT_ADMIN_ROLE, msg.sender)){
+            revert NotAdmin(msg.sender);
+        }
         _;
     }
 
@@ -44,7 +46,9 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifAdmin(address _address) external view override {
-        require(isAdmin(_address), "caller is not admin");
+        if(!isAdmin(_address)){
+            revert NotAdmin(_address);
+        }
     }
 
     /**
@@ -52,7 +56,9 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifProjectContract(address _address) external view override {
-        require(isProjectContract(_address), "caller is not Project contract");
+        if(!isProjectContract(_address)){
+            revert NotProjectContract(_address);
+        }
     }
 
     /**
@@ -60,6 +66,9 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifDataManager(address _address) external view override {
+        if(!isDataManager(_address)){
+            revert NotDataManager(_address);
+        }
         require(isDataManager(_address), "caller is not data manager");
     }
 

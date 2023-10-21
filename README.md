@@ -82,7 +82,7 @@ Follow these steps to set up and run the project locally:
 
 ## Documentation
 
-In-depth documentation on LandRocker and the latest deployed contracts addresses are available at [LandRocker Docs](https://whitepaper.landrocker.io/).
+In-depth documentation on LandRocker and the latest deployed contracts addresses are available at [Pubit Docs](https://whitepaper.pubit.one/).
 
 ## Contributing
 

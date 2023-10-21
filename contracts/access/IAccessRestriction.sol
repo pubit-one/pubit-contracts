@@ -11,7 +11,6 @@ interface IAccessRestriction is IAccessControl {
     error NotAdmin(address caller);
     error NotProjectContract(address caller);
     error NotOwner(address caller);
-    function initialize(address _deployer) external;
 
     /** @return true if AccessRestriction contract has been initialized  */
     function isAccessRestriction() external view returns (bool);

@@ -2,15 +2,12 @@
 
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "./IAccessRestriction.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {IAccessRestriction} from "./IAccessRestriction.sol";
 
 /** @title AccessRestriction contract */
 
-contract AccessRestriction is
-    AccessControlUpgradeable,
-    IAccessRestriction
-{
+contract AccessRestriction is AccessControl, IAccessRestriction {
     bytes32 public constant Project_CONTRACT_ROLE =
         keccak256("Project_CONTRACT_ROLE");
     bytes32 public constant DATA_MANAGER_ROLE = keccak256("DATA_MANAGER_ROLE");
@@ -20,22 +17,13 @@ contract AccessRestriction is
 
     /** NOTE modifier to check msg.sender has admin role */
     modifier onlyAdmin() {
-        if(!hasRole(DEFAULT_ADMIN_ROLE, msg.sender)){
+        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender)) {
             revert NotAdmin(msg.sender);
         }
         _;
     }
 
-    /**
-     * @dev initialize accessRestriction contract and set true for {isAccessRestriction}
-     * @param _deployer address of the deployer that DEFAULT_ADMIN_ROLE set to it
-     */
-    function initialize(address _deployer) external override initializer {
-        AccessControlUpgradeable.__AccessControl_init();
-        // PausableUpgradeable.__Pausable_init();
-
-        isAccessRestriction = true;
-
+    constructor(address _deployer) {
         if (!hasRole(DEFAULT_ADMIN_ROLE, _deployer)) {
             _grantRole(DEFAULT_ADMIN_ROLE, _deployer);
         }
@@ -46,7 +34,7 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifAdmin(address _address) external view override {
-        if(!isAdmin(_address)){
+        if (!isAdmin(_address)) {
             revert NotAdmin(_address);
         }
     }
@@ -56,7 +44,7 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifProjectContract(address _address) external view override {
-        if(!isProjectContract(_address)){
+        if (!isProjectContract(_address)) {
             revert NotProjectContract(_address);
         }
     }
@@ -66,11 +54,10 @@ contract AccessRestriction is
      * @param _address input address
      */
     function ifDataManager(address _address) external view override {
-        if(!isDataManager(_address)){
+        if (!isDataManager(_address)) {
             revert NotDataManager(_address);
         }
     }
-
 
     /**
      * @dev check if given address has admin role
@@ -86,12 +73,9 @@ contract AccessRestriction is
      * @param _address input address
      * @return if given address has Project contract role
      */
-    function isProjectContract(address _address)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function isProjectContract(
+        address _address
+    ) public view override returns (bool) {
         return hasRole(Project_CONTRACT_ROLE, _address);
     }
 
@@ -100,12 +84,9 @@ contract AccessRestriction is
      * @param _address input address
      * @return if given address has data manager role
      */
-    function isDataManager(address _address)
-        public
-        view
-        override
-        returns (bool)
-    {
+    function isDataManager(
+        address _address
+    ) public view override returns (bool) {
         return hasRole(DATA_MANAGER_ROLE, _address);
     }
 }

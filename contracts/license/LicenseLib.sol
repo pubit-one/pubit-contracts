@@ -12,21 +12,21 @@ library LicenseLib {
     //     Other,PoemWriter, Composer, Musician, Singer, Narator, Producer, Publisher, OnlinePublisher, OnlineStreamer, Remixer, Club, OnlineContent, ProfessionalVideo, SocialMedia, PersonalPublish, EndUser,
     // }
     // VideoLicenseType{
-    //     Other,Artist, Producer, Publisher, OnlinePublisher, AudioStreamer, PartialUse, PlayChannel, SubTitleProvider, DubPublisher, Dubber, Adaptor, Cinema, Hotels, Transportation, Institutes, EndUser,  
+    //     Other,Artist, Producer, Publisher, OnlinePublisher, AudioStreamer, PartialUse, PlayChannel, SubTitleProvider, DubPublisher, Dubber, Adaptor, Cinema, Hotels, Transportation, Institutes, EndUser,
     // }
     // Program{
     //     Other,
     // }
-    
-    enum licenseTypestatus{
+
+    enum licenseTypestatus {
         NotExists, //0
-        Expired,   //1
-        Canceled,  //2
-        Blocked,   //3
-        Invalid,   //4
-        Active   //5
+        Expired, //1
+        Canceled, //2
+        Blocked, //3
+        Invalid, //4
+        Active //5
     }
-    enum ItemStatus{
+    enum ItemStatus {
         NotExists, //0
         Created,
         Paused,
@@ -34,14 +34,14 @@ library LicenseLib {
         Deleted,
         Active
     }
-    enum ActionCat{
+    enum ActionCat {
         Default,
         PreActions,
         GenActions,
         PostActions,
         ViewActions
     }
-    enum ActionReturn{
+    enum ActionReturn {
         NoReturn,
         Bool,
         Index,
@@ -55,22 +55,21 @@ library LicenseLib {
     error InvalidContractAddress(address _contractAddress);
     error ContractAddressExist(address _contractAddress);
     error InvalidAccessRestriction(address _contractAddress);
-    error ActionUsedBefore(address _contractAddress,bytes4 _action);
+    error ActionUsedBefore(address _contractAddress, bytes4 _action);
     error ActionAlreadyExists(bytes32 _action);
     error ActionCountExeeded(uint arraySize);
-    struct LicenseMetadata{
+    struct LicenseMetadata {
         bytes32 contentType;
         bytes32 licenseType;
         address contractAddress;
         uint96 templateId;
     }
-    struct LicenseIds{
+    struct LicenseIds {
         address _contractAddress;
         uint88 id;
         uint8 status;
-
     }
-    struct ActionData{
+    struct ActionData {
         uint128 index;
         ActionCat actionType;
         ActionReturn actionReturn;
@@ -79,8 +78,4 @@ library LicenseLib {
         uint32 reserved2;
         uint32 reserved3;
     }
-    
-
-
-
 }

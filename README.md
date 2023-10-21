@@ -11,8 +11,7 @@ Pubit is a revolutionary Blockchain-Based Licensing Decentralized Application (D
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
-- [Architecture](#architecture)
+- [Documentation](#Documentation)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -30,34 +29,70 @@ Pubit is a revolutionary Blockchain-Based Licensing Decentralized Application (D
 ### Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-- [List any prerequisites or system requirements]
+  1. Install Node.js and npm:\*\* Download and install Node.js and npm from [nodejs.org](https://nodejs.org/).
+
 
 ### Installation
 
-[Provide step-by-step installation instructions]
 
-## Usage
+Follow these steps to set up and run the project locally:
 
-[Provide examples and guidelines on how to use your DApp]
 
-## Architecture
+1. Clone this repository:
 
-Explain the overall architecture of your DApp, including any diagrams if applicable.
+   ```bash
+   git clone git@github.com:pubit-one/pubit-contracts.git
+
+   ```
+
+2. Navigate to Project Directory:
+
+   ```bash
+   cd pubit-contracts
+
+   ```
+
+3. Install Dependencies:
+
+   ```bash
+   npm install
+
+   ```
+
+4. Start Local Node:
+
+   ```bash
+   npx hardhat node
+
+   ```
+
+5. Compile Contracts:
+
+   ```bash
+   npx hardhat compile
+
+   ```
+
+6. Run Tests:
+
+   ```bash
+   npx hardhat test
+
+   ```
+
+## Documentation
+
+In-depth documentation on LandRocker and the latest deployed contracts addresses are available at [LandRocker Docs](https://whitepaper.landrocker.io/).
 
 ## Contributing
 
-We welcome contributions from the open-source community. To contribute to Pubit, please follow these steps:
-1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Make your changes and test thoroughly
-4. Submit a pull request with a clear description of your changes
+We welcome contributions! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+
+
+## Security
+
+Vulnerabilities should be disclosed directly to the LandRocker team by emailing pubit.one@gmail.com.
 
 ## License
 
-This project is licensed under the [License Name] - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-- [Your Name]
-- Email: [Your Email Address]
-- GitHub: [Your GitHub Profile]
+&copy; 2023, Pubit

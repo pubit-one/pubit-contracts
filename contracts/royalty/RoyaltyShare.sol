@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./IRoyaltyShare.sol";
@@ -50,7 +50,7 @@ contract RoyaltyShare is IRoyaltyShare {
         validTokens[_tokenAddress]=_isValid;
     }
 
-    function withdrawBalance(uint256 _amount, address tokenAddress)
+    function withdrawBalance(uint256 _amount, address _tokenAddress)
         external
         override
     {
@@ -64,20 +64,20 @@ contract RoyaltyShare is IRoyaltyShare {
         if(!validTokens[_tokenAddress]){
             revert RoyaltyLib.InvalidToken(_tokenAddress);
         }
-        IERC20 token = IERC20(tokenAddress);
-        uint256 holderWithdraw = holderTokenWithdraws[msg.sender][tokenAddress];
+        IERC20 token = IERC20(_tokenAddress);
+        uint256 holderWithdraw = holderTokenWithdraws[msg.sender][_tokenAddress];
         uint256 availableBalance = ((token.balanceOf(address(this)) +
-            tokenWithdraws[tokenAddress]) * share) / sumShares;
+            tokenWithdraws[_tokenAddress]) * share) / sumShares;
         if(availableBalance < holderWithdraw+_amount){
             revert RoyaltyLib.InsufficientBalance();
         }
-        holderTokenWithdraws[msg.sender][tokenAddress] += _amount;
-        tokenWithdraws[tokenAddress] += _amount;
+        holderTokenWithdraws[msg.sender][_tokenAddress] += _amount;
+        tokenWithdraws[_tokenAddress] += _amount;
         bool success = token.transfer(msg.sender, _amount);
         if (!success){
             revert RoyaltyLib.TransferFailed();
         }
-        emit Erc20Withdrawn(tokenAddress, _amount, msg.sender);
+        emit Erc20Withdrawn(_tokenAddress, _amount, msg.sender);
     }
 
     function withdrawBase(uint256 _amount) external override {

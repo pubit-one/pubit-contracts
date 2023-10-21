@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BUSL-1.1
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 library LicenseLib {
     // ContentType {
@@ -18,48 +18,47 @@ library LicenseLib {
     //     Other,
     // }
     
-    enum LicenseStatus{
+    enum licenseTypestatus{
         NotExists, //0
         Expired,   //1
         Canceled,  //2
         Blocked,   //3
         Invalid,   //4
-        Active,    //5
+        Active   //5
     }
     enum ItemStatus{
         NotExists, //0
+        Created,
         Paused,
         Expired,
         Deleted,
-        Active,
+        Active
     }
-    /**
-    * @dev enum for actions on modifiying, pausing or deleting the offer
-    */
-    enum Actions{
-        UpdateItem,
-        CancelItem,
-        PauseItem,
-        ResumeItem,
-        CancelOffer,
-        BuyLicense,
-        AcceptOffer,
-        ChangeLicense,
-        AcceptChange,
-        UpgradeLicense,
-        CancelLicense,
-        BlockLicense,
-        InvalidateLicense,
-        Checklicense
+    enum ActionCat{
+        Default,
+        PreActions,
+        GenActions,
+        PostActions,
+        ViewActions
     }
-    error contentTypeExists(bytes32 _contentType);
+    enum ActionReturn{
+        NoReturn,
+        Bool,
+        Index,
+        Status,
+        Data
+    }
+    error ContentTypeExists(bytes32 _contentType);
     error ContentTypeNotSupported(bytes32 _contentType);
     error ContractExistsForLicense(bytes32 _licenseType);
     error LicenseTypeNotSupported(bytes32 _licenseType);
     error InvalidContractAddress(address _contractAddress);
     error ContractAddressExist(address _contractAddress);
     error InvalidAccessRestriction(address _contractAddress);
-    struct LicenceMetadata{
+    error ActionUsedBefore(address _contractAddress,bytes4 _action);
+    error ActionAlreadyExists(bytes32 _action);
+    error ActionCountExeeded(uint arraySize);
+    struct LicenseMetadata{
         bytes32 contentType;
         bytes32 licenseType;
         address contractAddress;
@@ -71,6 +70,17 @@ library LicenseLib {
         uint8 status;
 
     }
+    struct ActionData{
+        uint128 index;
+        ActionCat actionType;
+        ActionReturn actionReturn;
+        bool exists;
+        uint32 reserved;
+        uint32 reserved2;
+        uint32 reserved3;
+    }
+    
+
 
 
 }

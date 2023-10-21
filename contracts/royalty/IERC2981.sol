@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BUSL-1.1
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 import "./IERC165.sol";
 
 interface IERC2981 is IERC165 {

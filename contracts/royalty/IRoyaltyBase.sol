@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BUSL-1.1
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 import "./IERC2981.sol";
 import "./IERC165.sol";
@@ -26,7 +26,7 @@ interface IRoyalty is IERC165, IERC2981 {
 
     /**
     * @dev emitted when admin updated to maimum value
-    * @param maxRoyalty value of royalty
+    * @return maxRoyalty value of royalty
     */
     function maxRoyalty() external view returns (uint16);
 

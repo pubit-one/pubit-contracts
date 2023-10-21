@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: BUSL-1.1
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 
 /** @title AccessRestriction interface*/
 
-interface IAccessRestriction is IAccessControlUpgradeable {
+interface IAccessRestriction is IAccessControl {
     error NotDataManager(address caller);
     error NotAdmin(address caller);
     error NotProjectContract(address caller);

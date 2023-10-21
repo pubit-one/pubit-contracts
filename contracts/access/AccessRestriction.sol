@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BUSL-1.1
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "./IAccessRestriction.sol";
@@ -32,12 +32,12 @@ contract AccessRestriction is
      */
     function initialize(address _deployer) external override initializer {
         AccessControlUpgradeable.__AccessControl_init();
-        PausableUpgradeable.__Pausable_init();
+        // PausableUpgradeable.__Pausable_init();
 
         isAccessRestriction = true;
 
         if (!hasRole(DEFAULT_ADMIN_ROLE, _deployer)) {
-            _setupRole(DEFAULT_ADMIN_ROLE, _deployer);
+            _grantRole(DEFAULT_ADMIN_ROLE, _deployer);
         }
     }
 
@@ -69,7 +69,6 @@ contract AccessRestriction is
         if(!isDataManager(_address)){
             revert NotDataManager(_address);
         }
-        require(isDataManager(_address), "caller is not data manager");
     }
 
 

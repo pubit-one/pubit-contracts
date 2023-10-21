@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.20;
 
 library RoyaltyLib {
     struct Share {
@@ -16,7 +16,7 @@ library RoyaltyLib {
     error NotShareHolder(address caller);
     error InvalidWithdrawAmount(uint amount);
     error InvalidAddress(address addr);
-    error Insuffiecen();
+    error InsufficientBalance();
     error TransferFailed();
     error InvalidShare(uint96 share);
 

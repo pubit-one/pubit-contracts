@@ -1,16 +1,16 @@
 {
   "name": "hardhat-project",
-   "scripts": {
+  "scripts": {
     "build": "npx hardhat compile",
     "test": "npx hardhat test",
     "test:coverage": "npx hardhat coverage",
     "deploy:mumbai": "npx hardhat run scripts/main.js --network mumbai",
-    "deploy:scroll" : "npx hardhat run scripts/main.js --network scroll"
+    "deploy:scroll": "npx hardhat run scripts/main.js --network scroll"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@openzeppelin/hardhat-upgrades": "^2.3.3",
-    "hardhat": "^2.13.0"
+    "hardhat": "^2.18.2"
   },
   "dependencies": {
     "@gelatonetwork/relay-context": "^3.2.0",
@@ -19,6 +19,8 @@
     "@openzeppelin/contracts-upgradeable": "^5.0.0",
     "@safe-global/mock-contract": "^4.1.0",
     "@safe-global/safe-core-protocol": "^0.2.1-alpha.0",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-periphery": "^1.4.4",
     "dotenv": "^16.3.1",
     "hardhat-dependency-compiler": "^1.1.3"
   }
